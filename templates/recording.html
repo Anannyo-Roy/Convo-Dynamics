@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='Image/Logo.ico') }}" type="image/x-icon">
+
+      <title>Live Meeting </title>
+      <style>
+         .styled-button {
+            border-radius: 14px;
+            background-color: #8d19ba;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 16px;
+            padding: 6px;
+            width: 100px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 4px;
+         }
+         .styled-button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+         }
+         .styled-button span:after {
+            content: '\00ab';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: -10px;
+            transition: 0.5s;
+         }
+         .styled-button:hover span {
+            padding-left: 15px;
+         }
+         .styled-button:hover span:after {
+            opacity: 1;
+            left: 0;
+         }
+         .logo-button {
+            background-color: #8d19ba; 
+            border: none;
+            color: white; 
+            padding: 12px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 25px; 
+            display: inline-flex; 
+            align-items: center;  
+            cursor: pointer;
+            transition: background-color 0.3s ease; 
+         }
+         .button-logo {
+            height: 20px; 
+            width: 20px;  
+            margin-right: 8px; 
+         }
+         .logo-button:hover {
+            background-color: #8249a4;
+         }
+      </style>
+   </head>
+   <body style="background-color: black;">
+      <form action="/back" method="post">
+         <Button class="styled-button">
+            <span>Back</span>
+         </Button>
+      </form>
+      <br>
+      <div style="padding-bottom: 25px;">
+         <table style="margin: 0 auto ; padding-left : 250px; ">
+            <tr>
+               <td style="color: white;font-size: 65px; width: 50%;">
+                  Live Meeting
+               </td>
+               <td style="width: 50%;padding-left: 10px;padding-top: 17px;"> 
+                  <img src="{{ url_for('static', filename='Image/Rec image.png') }}" alt="Rec Image" width="40">
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div style="padding: 10px; text-align:center;">
+         <img src="{{ url_for('video_feed') }}" height="80%" alt="Camera Image" style="border: 2px solid white; width: 720px; height: 405px;">
+         <div>
+            <form action="/recordingrequest" method="post" style="display: inline-block;">
+               <button type="submit" name="start/stop" class="logo-button">
+               <img src="{{ url_for('static', filename='Image/play-and-pause-button.png') }}" alt="Logo" class="button-logo"> 
+               <span>Start & Stop</span>
+               </button>
+            </form>
+            <form action="{{ url_for('save_and_proceed') }}" method="post" style="display: inline-block;">
+               <button class="logo-button">
+                   <img src="{{ url_for('static', filename='Image/save.png') }}" alt="Logo" class="button-logo"> 
+                   <span>Save & Proceed</span>
+               </button>
+           </form>
+         </div>
+         <br>
+      </div>
+      <pre style="color: white; text-align:center; font-size: 20px;padding-top: 20px;">
+Rest assured, your recordings are kept confidential and are solely used for analysis within ConvoDynamics.
+Prioritize your privacy and adhere to strict data protection measures.
+</pre>
+   </body>
+</html>

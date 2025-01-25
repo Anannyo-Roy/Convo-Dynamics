@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Image/Logo.ico') }}" type="image/x-icon">
+    <title>Upload Video</title>
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), url("../static/Image/background.png");
+            background-size: cover; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            
+        }
+
+        .BackButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .BackButton .styled-button {
+            border-radius: 16px;
+            background-color: rgb(0, 0, 0);
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 18px;
+            padding: 6px;
+            width: 100px;
+            transition: background-color 0.5s; 
+            cursor: pointer;
+            margin: 4px;
+         }
+
+         .BackButton .styled-button:hover {
+             background-color: rgba(211, 211, 211, 0.632); 
+            }
+            
+         .BackButton .styled-button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+         }
+
+         .BackButton .styled-button span::after {
+            content: '\00ab';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: -10px;
+            transition: 0.5s;
+         }
+
+         .BackButton .styled-button:hover span {
+            padding-left: 15px;
+         }
+
+         .BackButton .styled-button:hover span::after {
+            opacity: 1;
+            left: 0;
+         }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.799);   
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.24);
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            max-width: 600px;
+            width: 45%;
+            text-align: center; /* Center the content */
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-right: 15PX;
+            color: #1b1b1b;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            padding: 90px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+
+        button[type="submit"] {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #178e1b;
+        }
+
+        #dropArea {
+            border: 2px dashed #ffffffd7;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        video {
+            padding-left: 20px;
+            max-width: 95%;
+            height: auto;
+        }
+        
+        
+    </style>
+</head>
+
+   
+<body>
+    <div class="BackButton">
+        <form action="/back" method="post">
+            <button class="styled-button">
+                <span>Back</span>
+            </button> 
+        </form>
+    </div>
+    <div class="container">
+        <h2>Upload Video</h2>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <div id="dropArea">Drag and drop video files here or <label for="videoFile">browse</label></div>
+            <input type="file" id="videoFile" name="videoFile" accept="video/*">
+            <button type="submit">Upload</button>
+        </form>
+        <div id="videoContainer" style="display: none;">
+            <h3>Uploaded Video</h3>
+            <video id="uploadedVideo" controls>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        const dropArea = document.getElementById('dropArea');
+        const videoFileInput = document.getElementById('videoFile');
+        const videoContainer = document.getElementById('videoContainer');
+        const uploadedVideo = document.getElementById('uploadedVideo');
+
+        dropArea.addEventListener('dragover', function (event) {
+            event.preventDefault();
+            dropArea.style.backgroundColor = '#f0f0f0';
+        });
+
+        dropArea.addEventListener('dragleave', function () {
+            dropArea.style.backgroundColor = 'transparent';
+        });
+
+        dropArea.addEventListener('drop', function (event) {
+            event.preventDefault();
+            dropArea.style.backgroundColor = 'transparent';
+            const file = event.dataTransfer.files[0];
+            handleFile(file);
+        });
+
+        // Trigger file input click event when label is clicked
+        dropArea.addEventListener('click', function () {
+            videoFileInput.click();
+        });
+
+        videoFileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            handleFile(file);
+        });
+
+        function handleFile(file) {
+            if (file) {
+                videoContainer.style.display = 'block';
+                uploadedVideo.src = URL.createObjectURL(file);
+            }
+        }
+    </script>
+</body>
+</html>

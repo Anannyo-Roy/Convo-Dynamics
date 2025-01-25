@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Image/Logo.ico') }}" type="image/x-icon">
+
+    <title>Upload Video</title>
+    <style>
+       
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: rgb(208, 223, 225);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.82),rgba(0,0,0,0.82)),url("../static/Image/background.png"); 
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center; 
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        
+        #videoContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            max-height: 400px; 
+            overflow-y: auto; 
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Upload Video</h2>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" id="videoFile" name="videoFile" accept="video/*">
+            <button type="submit">Upload</button>
+        </form>
+        <div id="videoContainer" style="display: none;">
+            <h3>Uploaded Video</h3>
+            <video id="uploadedVideo" controls>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <script>
+        document.getElementById('videoFile').addEventListener('change', function(event) {
+            const videoFile = event.target.files[0];
+            const videoContainer = document.getElementById('videoContainer');
+            const uploadedVideo = document.getElementById('uploadedVideo');
+
+            if (videoFile) {
+                videoContainer.style.display = 'block'; // Show the video container
+                uploadedVideo.src = URL.createObjectURL(videoFile); // Set the source of the video player
+            }
+        });
+    </script>
+</body>
+</html>

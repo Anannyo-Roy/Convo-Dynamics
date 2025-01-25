@@ -1,0 +1,41 @@
+
+.styled-button {
+  border-radius: 14px;
+  background-color: #9b59b6;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  padding: 6px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.styled-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.styled-button span:after {
+  content: '\00ab';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -15px;
+  transition: 0.5s;
+}
+
+.styled-button:hover span {
+  padding-left: 20px;
+}
+
+.styled-button:hover span:after {
+  opacity: 1;
+  left: 0;
+}
+
+

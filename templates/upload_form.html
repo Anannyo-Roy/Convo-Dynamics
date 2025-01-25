@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Image/Logo.ico') }}" type="image/x-icon">
+    <title>Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+            background-image: linear-gradient(rgba(0,0,0,0.82),rgba(0,0,0,0.82)),url("../static/Image/background.png"); 
+        }
+
+        h1{
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+        }
+
+        li:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .labels {
+            margin-bottom: 10px;
+        }
+
+        .label {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+
+        .emotion-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            text-align: center;
+            border: 3px solid #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Results</h1>
+
+    <!-- Overall Meeting Section -->
+    <div class="section">
+        <h2 class="section-title">Overall Meeting</h2>
+        <div class="section-content">
+            <span class="label">
+                speech
+                <img class="emotion-image" src="{{ overall[2] }}" alt="{{ overall[0] }} Image">
+            </span>
+            <span class="label">
+                facial
+                <img class="emotion-image" src="{{ overall[3] }}" alt="{{ overall[1] }} Image">
+            </span>
+        </div>
+    </div>
+
+    <!-- Detailed Analysis Section -->
+    <div class="section">
+        <h2 class="section-title">Detailed Analysis</h2>
+        <ul class="section-content">
+            {% for row in data %}
+            <li>
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 73%;">
+                            <div class="text" style="font-size: 20px;">{{ row[0] }}</div>
+                        </td>
+                        <td>
+                            <div class="labels">
+                                <span class="label">
+                                    speech
+                                    <img class="emotion-image" src="{{ row[3] }}" alt="{{ row[1] }} Image">
+                                </span>
+                                <span class="label">
+                                    facial
+                                    <img class="emotion-image" src="{{ row[4] }}" alt="{{ row[2] }} Image">
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

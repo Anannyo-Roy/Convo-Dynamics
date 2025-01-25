@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Image/Logo.ico') }}" type="image/x-icon">
+    <title>Main</title>
+    <link href="https://fonts.googleapis.com/css2?
+    family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), url("../static/Image/background.png");
+    background-position: center;
+    background-size: cover;
+    padding-left: 8%;
+    padding-right: 8%;
+    box-sizing: border-box;
+}
+
+        .navbar{
+            height: 12%;
+            display: flex;
+            align-items: center;
+        }
+        .logo{
+            padding-top: 14px;
+            width: 100px;
+            height: 85px;
+            cursor: pointer;
+        }
+        .menu-icon{
+            width: 30px;
+            cursor: pointer;
+            margin-left: 40px;
+        }
+        nav{
+            flex: 1;
+            text-align: right;
+        }
+        nav{
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li{
+            list-style: none;
+            display: inline-block;
+            margin-left: 60px;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 13;
+            position: relative;
+        }
+        nav ul li a::before {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+        }
+        nav ul li a:hover::before {
+        transform: scaleX(1);
+        }
+        nav ul li a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+        }
+        nav ul li a:hover::after {
+        transform: scaleX(1);
+        }
+     .row{
+            display: flex;
+            height: 88%;
+            align-items: center;
+        }
+        .col{
+            flex-basis: 50%;
+        }
+        h1{
+            color: #fff;
+            font-size: 125px;
+            padding-right: 250px;
+        }
+        p{
+            color: #fff;
+            font-size: 11px;
+            /* line-height: 15px; */
+        }
+        .animated-button {
+    color: #ffffff;
+    font-size: 20px;
+    background: 	#1a1a1a;
+    border: 0;
+    cursor: pointer;
+    padding: 15px 25px;
+    border-radius: 40px;
+    outline: 0;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+  .animated-button img{
+    width: 16px;
+    margin-left: 8px;
+  }
+  
+  .animated-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(211, 211, 211, 0.632);
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  
+  .animated-button:hover::before {
+    width: 200%;
+    height: 200%;
+    transform: translate(-50%, -50%) scale(2);
+  }
+  
+  .animated-button span {
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s ease;
+  }
+  
+  .animated-button:hover span {
+    transform: scale(0.8);
+  }
+  
+.card{
+    width: 230px;
+    height: 260px;
+    display: inline-block;
+    border-radius: 20px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.5s; 
+}
+.card1{
+    background-image: url("../static/Image/pic-1.png");   
+}
+.card2{
+    background-image: url("../static/Image/pic-2.png");
+}
+.card3{
+    background-image: url("../static/Image/pic-3.png");
+}
+.card4{
+    background-image: url("../static/Image/pic-4.png");
+}
+.card:hover{
+    transform: translateY(-10px);
+}
+h5{
+    font-size: 15px;
+    color:#fff;
+    text-shadow: 0 0 5px #ffffff;
+    padding-top: 90px;
+    text-align: center;
+   
+}
+h3{
+    font-size: 15px;
+    color:#fff;
+    text-shadow: 0 0 5px #ffffff;
+    padding-top: 90px;
+    text-align: center;
+   
+}
+.card p{
+    padding-top: 2px;
+    text-shadow: 0 0 5px #000000;
+    font-size: 12px;
+    text-align: center;
+   
+}
+
+
+.col h1 {
+    overflow: hidden; 
+  }
+  
+  .col h1 span {
+    display: inline-block; 
+    opacity: 0; 
+    animation: revealText 1.5s forwards; 
+  }
+  
+  @keyframes revealText {
+    from {
+      opacity: 0; 
+      transform: translateY(-50px); 
+    }
+    to {
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        <div class="navbar">
+            <img src="{{ url_for('static', filename='Image/logo.png') }}" alt="Sasta Logo" class="logo">
+            <nav>
+                <ul>
+                    <li><a href="/recorded">Record</a></li>
+                    <li><a href="/live">Live Meeting</a></li>
+                    <li><a href="/pre-recorded">Pre-Recorded Analyzer</a></li>
+                    <li><a href="/about">About Us</a></li>
+                </ul>
+            </nav>
+            <img src="{{ url_for('static', filename='Image/menu.png') }}" alt="Sasta menu" class="menu-icon">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h1><span>Convo</span></h1>
+                <h1><span style="padding-bottom: 12px;">Dynamics</span></h1>
+                <pre style="color: #fff;font-size: 17px;line-height: 23px;">
+Welcome to ConvoDynamics, your portal to unraveling human interaction like never before.
+Delve into conversations and unveil the concealed emotional depths that steer each interaction.
+Acquire insights to enrich communication and cultivate deeper connections in every dialogue.</pre>
+                    <button class="animated-button">More About<img src="{{ url_for('static', filename='Image/arrow-white.png') }}" alt="" /></button>
+                </div>
+            <div class="col">
+                <div class="card card1">
+                    <h5>RECORDED ANALYZER</h5>
+                    <form action="/submit" method="post">
+                        <p>Upload your video to unlock insights into emotional dynamics and key highlights of your conversation.</p>
+                    </form>
+                </div>
+                
+                <div class="card card2">
+                    <h5>REALTIME-ANALYSER</h5>
+                    <form action="/submit2" method="post">
+                        <p>Track your emotions live: Upload your video to uncover the key highlights of your conversation.</p>
+                    </form>
+                </div>
+                <div class="card card3">
+                    <h5>PRE-RECORDED ANALYZER</h5>
+                    <form action="/submit3" method="post">
+                        <p>Uncover valuable insights through pre-recorded videos</p>
+                    </form>
+                </div>
+                <div class="card card4">
+                    <h5>ABOUT US</h5>
+                    <form action="/submit" method="post">
+                        <p>Discover insights into conversations: Upload videos to uncover emotional dynamics and key highlights.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
